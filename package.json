@@ -1,0 +1,27 @@
+{
+  "name": "minEdit",
+  "version": "1.0.0",
+  "description": "把更新的内容同步的服务器.",
+  "main": "index.js",
+  "scripts": {
+    "start": "concurrently \"npm:server\" \"npm:client\"",
+    "server": "cd server && node index.js",
+    "build": "gulp",
+    "client": "cd client && node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^5.3.0",
+    "del": "^6.0.0",
+    "gulp": "^4.0.2",
+    "gulp-uglify-es": "^2.0.0",
+    "shelljs": "^0.8.4",
+    "tar": "^6.0.5"
+  },
+  "dependencies": {
+    "shx": "^0.3.3"
+  }
+}
