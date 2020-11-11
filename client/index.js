@@ -10,17 +10,31 @@ console.log(`config`, {
   workDir,
 })
 
-const chokidar = require('chokidar');
-chokidar.watch(workDir).on(`change`, (filePath) => {
-  sendFile({filePath, action: `change`})
-});
+const watchList = [
+  workDir,
+  `!**/node_modules`,
+]
 
-// [`change`, `add`, `unlink`].forEach(action => {
-//   chokidar.watch(workDir).on(action, (filePath) => {
-//     console.log(action, filePath)
-//     sendFile({filePath, action})
-//   });
-// })
+const chokidar = require('chokidar');
+// chokidar.watch(watchList).on(`change`, (filePath) => {
+//   sendFile({filePath, action: `change`})
+// });
+
+[
+  `add`,
+  // `addDir`,
+  `change`,
+  // `unlink`,
+  // `unlinkDir`,
+].forEach(action => {
+  chokidar.watch(watchList, {
+  ignored: /(^|[\/\\])\../, // 忽略带点文件
+  persistent: true
+}).on(action, (filePath) => {
+    console.log(action, filePath)
+    sendFile({filePath, action})
+  });
+})
 
 /**
  * 上传文件

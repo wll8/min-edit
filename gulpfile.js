@@ -13,10 +13,12 @@ gulp.task(`copy`, (cb) => { // 复制 server 中的文件, 例如 package.json
     npx shx mkdir -p ./dist/server/package/
     rem npx shx cp ./server/index.js ./dist/server/package/
     npx shx cp ./server/package.json ./dist/server/package/
+    npx shx cp ./server/package-lock.json ./dist/server/package/
 
     npx shx mkdir -p ./dist/client/package/
     rem npx shx cp ./client/index.js ./dist/client/package/
     npx shx cp ./client/package.json ./dist/client/package/
+    npx shx cp ./client/package-lock.json ./dist/client/package/
   `.split(`\n`).map(item => item.trim()).filter(item => item)
   cmdList.forEach(cmd => {
     console.log(`run: ${cmd}`)

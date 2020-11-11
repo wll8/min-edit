@@ -22,6 +22,8 @@ npm start
 ## 尝试
 安装并运行启动后, 尝试创建并编辑文件 `client/test/some.txt` 你会发现这个文件会自动同步到 `server/share_work/test/some.txt` , 其他文件不会同步进来.
 
+如果需要允许合同所有文件, 请修改 config.js 中的 server/allowRe 为 `.*` 即可.
+
 ## 发布
 ``` sh
 npm run build

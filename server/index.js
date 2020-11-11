@@ -33,7 +33,10 @@ const upload = multer({
 // 上传接口
 server.post('/upload', (req, res, next) => {
   upload(req, res, (err) => {
-    res.status(err ? 403 : 200).send({
+    res.status((
+      (allowAction(req.body.action) === false)
+      || err
+    ) ? 403 : 200).send({
       msg: err || `ok`
     })
   })
@@ -79,6 +82,20 @@ function toLinuxSepPath(pathStr) {
  */
 function allow(path) {
   return path.match(new RegExp(config.allowRe))
+}
+
+/**
+ * 允许的动作
+ * @param {string} action 动作名称
+ */
+function allowAction(action) {
+  return [
+    `add`,
+    // `addDir`,
+    `change`,
+    // `unlink`,
+    // `unlinkDir`,
+  ].includes(action)
 }
 
 /**
